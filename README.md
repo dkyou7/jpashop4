@@ -8,5 +8,6 @@
 - DB 연동 테스트 완료
 - spring-boot-devtools 적용 완료
     - build>recompile 해주자.
-- 
+- 간단한 1차 도메인 구성 완료
+
 
