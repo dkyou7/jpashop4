@@ -1,8 +1,8 @@
 package com.jpabook.domain;
 
+import com.jpabook.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 

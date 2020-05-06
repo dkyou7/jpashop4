@@ -1,5 +1,6 @@
-package com.jpabook.domain;
+package com.jpabook.domain.item;
 
+import com.jpabook.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)   // 상속 전략
 @DiscriminatorColumn(name = "dtype")
 @Getter @Setter
 public abstract class Item {

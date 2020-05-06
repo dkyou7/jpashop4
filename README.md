@@ -9,5 +9,6 @@
 - spring-boot-devtools 적용 완료
     - build>recompile 해주자.
 - 간단한 1차 도메인 구성 완료
+- 2차 도메인 구성 완료
 
 
