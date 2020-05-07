@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class MemberServiceTest {
     @Autowired MemberRepository memberRepository;
 
     @Test
+    @Rollback(false)
     public void join() {
         Member member = new Member();
         member.setName("test");
@@ -30,14 +32,15 @@ public class MemberServiceTest {
     }
 
     // 이거 통과 못한 이유가 fail 떄문인데 이유 알기 IllegalStateException은 왜 안되는걸까 어떻게 하면 통과될까
-    @Test(expected = AssertionError.class)
-    public void assertionErrorTest(){
+    // 이름을 같은 걸로 설정해야 테스트가 통과할 수 있다.
+    @Test(expected = IllegalStateException.class)
+    public void duplicateError(){
 
         Member member1 = new Member();
-        member1.setName("test1");
+        member1.setName("test");
 
         Member member2 = new Member();
-        member2.setName("test2");
+        member2.setName("test");
 
         memberService.join(member1);
         memberService.join(member2);
