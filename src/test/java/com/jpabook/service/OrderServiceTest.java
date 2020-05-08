@@ -50,23 +50,6 @@ public class OrderServiceTest {
         assertEquals("상품 주문시 주문한 상품 종류 수는 정확해야 한다.", 1, getOrder.getOrderItems().size());
         assertEquals("상품 주문시 주문한 가격은 가격 * 수량이다.", item.getPrice() * orderCount, getOrder.getTotalPrice());
         assertEquals("상품 주문시 주문한 수량만큼 재고가 줄어야 한다.", 8, item.getStockQuantity());
-
-    }
-
-    private Member createMember() {
-        Member member = new Member();
-        member.setName("회원1");
-        member.setAddress(new Address("서울", "강변", "123-123"));
-        em.persist(member);
-        return member;
-    }
-    private Book createBook(String name, int price, int stockQuantity){
-        Book book = new Book();
-        book.setName(name);
-        book.setPrice(price);
-        book.setStockQuantity(stockQuantity);
-        em.persist(book);
-        return book;
     }
 
     @Test(expected = NotEnoughStockException.class)
@@ -99,4 +82,20 @@ public class OrderServiceTest {
         assertEquals("상품 주문 취소시 주문한 수량만큼 재고가 늘어야 한다.", 10, item.getStockQuantity());
     }
 
+
+    private Member createMember() {
+        Member member = new Member();
+        member.setName("회원1");
+        member.setAddress(new Address("서울", "강변", "123-123"));
+        em.persist(member);
+        return member;
+    }
+    private Book createBook(String name, int price, int stockQuantity){
+        Book book = new Book();
+        book.setName(name);
+        book.setPrice(price);
+        book.setStockQuantity(stockQuantity);
+        em.persist(book);
+        return book;
+    }
 }
