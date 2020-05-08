@@ -28,7 +28,9 @@ public class OrderServiceTest {
     @PersistenceContext
     EntityManager em;
 
-    @Autowired OrderService orderService;
+    @Autowired
+    OrderService orderService;
+
     @Autowired
     OrderRepository orderRepository;
 
@@ -46,7 +48,7 @@ public class OrderServiceTest {
 
         assertEquals("상품 주문시 상태는 ORDER", OrderStatus.ORDER, getOrder.getStatus());
         assertEquals("상품 주문시 주문한 상품 종류 수는 정확해야 한다.", 1, getOrder.getOrderItems().size());
-        assertEquals("상품 주문시 주문한 가격은 가격 * 수량이다.", 10000 * 2, getOrder.getTotalPrice());
+        assertEquals("상품 주문시 주문한 가격은 가격 * 수량이다.", item.getPrice() * orderCount, getOrder.getTotalPrice());
         assertEquals("상품 주문시 주문한 수량만큼 재고가 줄어야 한다.", 8, item.getStockQuantity());
 
     }
