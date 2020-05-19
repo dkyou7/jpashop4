@@ -42,7 +42,6 @@ public class ItemController {
 
     @GetMapping(value = "/items")
     public String list(Model model){
-
         List<Item> items = itemService.findItems();
         model.addAttribute("items",items);
         return "items/itemList";
@@ -59,23 +58,12 @@ public class ItemController {
         form.setName(item.getName());
         form.setPrice(item.getPrice());
         form.setStockQuantity(item.getStockQuantity());
-
         model.addAttribute("form",form);
         return "items/updateItemForm";
     }
 
     @PostMapping(value = "/items/{itemId}/edit")
     public String updateItem(@ModelAttribute("form") BookForm form){
-
-//        Book book = new Book();
-//        book.setId(form.getId());
-//        book.setName(form.getName());
-//        book.setAuthor(form.getAuthor());
-//        book.setIsbn(form.getIsbn());
-//        book.setPrice(form.getPrice());
-//        book.setStockQuantity(form.getStockQuantity());
-//
-//        itemService.saveItem(book);
         itemService.updateItem(form.getId(),form.getName(),form.getPrice());
         return "redirect:/items";
     }
