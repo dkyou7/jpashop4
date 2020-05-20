@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class OrderServiceTest {
+public class  OrderServiceTest {
 
     @PersistenceContext
     EntityManager em;
