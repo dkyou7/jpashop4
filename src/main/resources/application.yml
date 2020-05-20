@@ -26,4 +26,4 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace   # sql query 에 들어오는 파라메타 값 추적
+    # org.hibernate.type: trace   # sql query 에 들어오는 파라메타 값 추적
