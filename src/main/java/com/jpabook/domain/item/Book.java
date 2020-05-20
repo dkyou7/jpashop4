@@ -14,4 +14,18 @@ public class Book extends Item {
     private String author;
     private String isbn;
 
+    @Override
+    public void changeName(String name) {
+        this.setName(name);
+    }
+
+    @Override
+    public void changePrice(int price) {
+        this.setPrice(price);
+    }
+
+    @Override
+    public void changeStockQuantity(int stockQuantity) {
+        this.setStockQuantity(stockQuantity);
+    }
 }

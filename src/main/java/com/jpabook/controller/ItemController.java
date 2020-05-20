@@ -63,8 +63,19 @@ public class ItemController {
     }
 
     @PostMapping(value = "/items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form){
-        itemService.updateItem(form.getId(),form.getName(),form.getPrice());
+    public String updateItem(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm form){
+
+//        Book book = new Book();
+//        book.setId(form.getId());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+
+        // 어설프게 엔티티 생성하지 말자.
+        // 너무 파라메터가 많으면 Dto 를 생성하여 넘기자.
+        itemService.updateItem(itemId,form.getName(), form.getPrice(), form.getStockQuantity());
         return "redirect:/items";
     }
 }

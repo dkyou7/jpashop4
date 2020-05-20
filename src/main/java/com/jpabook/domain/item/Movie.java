@@ -14,4 +14,18 @@ public class Movie extends Item {
     private String director;
     private String actor;
 
+    @Override
+    public void changeName(String name) {
+
+    }
+
+    @Override
+    public void changePrice(int price) {
+
+    }
+
+    @Override
+    public void changeStockQuantity(int stockQuantity) {
+
+    }
 }

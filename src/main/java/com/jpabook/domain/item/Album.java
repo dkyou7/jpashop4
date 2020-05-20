@@ -14,4 +14,18 @@ public class Album extends Item {
     private String artist;
     private String etc;
 
+    @Override
+    public void changeName(String name) {
+
+    }
+
+    @Override
+    public void changePrice(int price) {
+
+    }
+
+    @Override
+    public void changeStockQuantity(int stockQuantity) {
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.jpabook.service;
 
+import com.jpabook.domain.item.Book;
 import com.jpabook.domain.item.Item;
 import com.jpabook.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+
     public List<Item> findItems(){
         return itemRepository.findAll();
     }
@@ -29,9 +31,10 @@ public class ItemService {
     }
 
     @Transactional
-    public void updateItem(Long id, String name, int price) {
+    public void updateItem(Long id,String name, int price, int stockQuantity) {
         Item item = itemRepository.findOne(id);
-        item.setName(name);
-        item.setPrice(price);
+        item.changeName(name);      // 명시적으로 엔티티에서 바꿔주는 습관을 들이자.
+        item.changePrice(price);     // 그래야 어디 엔티티에서 바뀌었는지 명시적으로 알 수 있다.
+        item.changeStockQuantity(stockQuantity);
     }
 }
