@@ -101,6 +101,12 @@
             <version>1.6.1</version>
         </dependency>
 
+        <!-- 제이슨 리턴 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
+        </dependency>
+
 
     </dependencies>
 
