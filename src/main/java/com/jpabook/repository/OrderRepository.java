@@ -4,8 +4,6 @@ import com.jpabook.domain.Member;
 import com.jpabook.domain.Order;
 import com.jpabook.domain.OrderSearch;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
-import org.codehaus.groovy.util.StringUtil;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -106,5 +104,13 @@ public class OrderRepository {
                 "select o from Order o" +
                         " join fetch o.member m" +
                         " join fetch o.delivery d",Order.class).getResultList();
+    }
+
+    public List<OrderSimpleQueryDto> findOrderDto() {
+        return em.createQuery(
+                "select new com.jpabook.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address) " +
+                " from Order o"+
+                " join o.member m"+
+                " join o.delivery d",OrderSimpleQueryDto.class).getResultList();
     }
 }

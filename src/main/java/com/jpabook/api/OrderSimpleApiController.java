@@ -5,6 +5,7 @@ import com.jpabook.domain.Order;
 import com.jpabook.domain.OrderSearch;
 import com.jpabook.domain.OrderStatus;
 import com.jpabook.repository.OrderRepository;
+import com.jpabook.repository.OrderSimpleQueryDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,11 +51,19 @@ public class OrderSimpleApiController {
         return result;
     }
 
+    // 가장 적절한 수준의 맞춤
     @GetMapping("/v3/simple-orders")
     public List<SimpleOrderDto> ordersV3(){
         List<Order> orders = orderRepository.findAllWithMemberDelivery();
         return orders.stream().map(SimpleOrderDto::new).collect(Collectors.toList());
     }
+
+    // fit 한 느낌
+    @GetMapping("/v4/simple-orders")
+    public List<OrderSimpleQueryDto> ordersV4(){
+        return orderRepository.findOrderDto();
+    }
+
 
     @Data
     static class SimpleOrderDto{
