@@ -10,6 +10,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+
 import static org.junit.Assert.*;
 
 @SpringBootTest
@@ -28,7 +30,7 @@ public class MemberServiceTest {
 
         Long savedId = memberService.join(member);
 
-        assertEquals(member,memberRepository.findOne(savedId));
+        assertEquals(member,memberRepository.findById(savedId).orElseThrow(EntityNotFoundException::new));
     }
 
     // 이거 통과 못한 이유가 fail 떄문인데 이유 알기 IllegalStateException은 왜 안되는걸까 어떻게 하면 통과될까

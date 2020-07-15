@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -29,10 +30,7 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member){
-        List<Member> findMembers = memberRepository.findByName(member.getName());
-        if(!findMembers.isEmpty()){
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        }
+        Member findMembers = memberRepository.findById(member.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
     public List<Member> findMembers(){
@@ -40,12 +38,12 @@ public class MemberService {
     }
 
     public Member findOne(Long memberId){
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).orElseThrow(EntityNotFoundException::new);
     }
 
     @Transactional
     public void update(Long id,String name){
-        Member mem = memberRepository.findOne(id);
+        Member mem = memberRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         mem.setName(name);
     }
 }

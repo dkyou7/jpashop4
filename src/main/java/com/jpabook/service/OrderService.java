@@ -6,9 +6,11 @@ import com.jpabook.repository.ItemRepository;
 import com.jpabook.repository.MemberRepository;
 import com.jpabook.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -25,7 +27,7 @@ public class OrderService {
     public Long order(Long memberId, Long itemId, int count){
 
         // 엔티티 조회
-        Member member = memberRepository.findOne(memberId);     // 영속 상태에서 제어 가능하다.
+        Member member = memberRepository.findById(memberId).orElseThrow(EntityNotFoundException::new);     // 영속 상태에서 제어 가능하다.
         Item item = itemService.findOne(itemId);
 
         // 배송정보 생성
