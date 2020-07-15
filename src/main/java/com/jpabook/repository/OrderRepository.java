@@ -14,11 +14,19 @@ import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.jpabook.domain.QMember.member;
+import static com.jpabook.domain.QOrder.order;
+
 @Repository
-@RequiredArgsConstructor
 public class OrderRepository {
 
     private final EntityManager em;
+    private final JPAQueryFactory query;
+
+    public OrderRepository(EntityManager em, JPAQueryFactory query) {
+        this.em = em;
+        this.query = query;
+    }
 
     public void save(Order order){
         em.persist(order);
@@ -28,14 +36,10 @@ public class OrderRepository {
     }
 
     public List<Order> findAll(OrderSearch orderSearch){
-        JPAQueryFactory query = new JPAQueryFactory(em);
-        QOrder order = QOrder.order;
-        QMember member = QMember.member;
-
         return query
                 .select(order)
                 .from(order)
-                .join(order.member,member)
+                .join(order.member, member)
                 .where(statusEq(orderSearch.getOrderStatus()), nameLike(orderSearch.getMemberName()))
                 .limit(1000)
                 .fetch();
@@ -45,14 +49,14 @@ public class OrderRepository {
         if(StringUtils.hasText(memberName)){
             return null;
         }
-        return QMember.member.name.like(memberName);
+        return member.name.like(memberName);
     }
 
     private BooleanExpression statusEq(OrderStatus statusCond){
         if(statusCond==null){
             return null;
         }else{
-            return QOrder.order.status.eq(statusCond);
+            return order.status.eq(statusCond);
         }
     }
 
