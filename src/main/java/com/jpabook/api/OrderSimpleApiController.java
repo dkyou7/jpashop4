@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,10 +39,12 @@ public class OrderSimpleApiController {
         return all;
     }
 
+
+    // 주문 2개 조회
+    // N + 1 문제 -> 1 + 회원 N + 배송 N
     @GetMapping("/v2/simple-orders")
     public List<SimpleOrderDto> ordersV2(){
-        // 주문 2개 조회
-        // N + 1 문제 -> 1 + 회원 N + 배송 N
+
         List<Order> orders = orderRepository.findAllByString(new OrderSearch());
 
         List<SimpleOrderDto> result = orders.stream().map(SimpleOrderDto::new).collect(Collectors.toList());
